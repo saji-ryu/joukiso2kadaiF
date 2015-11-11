@@ -69,22 +69,17 @@ function moveteki() {
     }
   }
 }
-var kyoriX2,kyoriY2;
-function istouchedteki() {
-  kyoriX2 = Math.abs(tekiX - jikiX);
-  kyoriY2 = Math.abs(tekiY - jikiY);
-  if (kyoriX2 == 0 && kyoriY2 <= 50) {
-    over = 256;
-  }else if (kyoriX2 <= 50 && kyoriY2 == 0) {
-    over = 256;
+
+//キー押された時の動作をそれぞれ指定
+function keyPressed() {
+  if (keyCode === UP_ARROW || keyCode === DOWN_ARROW || keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
+    atari();
+    moveteki();
   }
 }
 
-
-function keyPressed() {
-  if (keyCode === UP_ARROW || keyCode === DOWN_ARROW || keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
-    moveteki();
-  }
+//当たり判定について
+function atari() {
   if (keyCode === UP_ARROW) {
     atariup();
   }
@@ -120,6 +115,17 @@ function atariright() {
   }
 }
 
+//ゲームオーバーについて
+var kyoriX2,kyoriY2;
+function istouchedteki() {
+  kyoriX2 = Math.abs(tekiX - jikiX);
+  kyoriY2 = Math.abs(tekiY - jikiY);
+  if (kyoriX2 == 0 && kyoriY2 <= 50) {
+    over = 256;
+  }else if (kyoriX2 <= 50 && kyoriY2 == 0) {
+    over = 256;
+  }
+}
 function gameover() {
   fill(256,50,50,over);
   rect(0,0,500,500);
