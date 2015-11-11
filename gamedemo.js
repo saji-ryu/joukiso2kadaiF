@@ -1,5 +1,4 @@
 var canvas;
-var linex;
 var a;
 var over = 0;
 
@@ -17,6 +16,7 @@ function draw() {
   teki();
   gameover();
   istouchedteki();
+  goal();
 }
 
 function field() {
@@ -114,6 +114,14 @@ function atariright() {
     jikiX += 50;
   }
 }
+
+function goal() {
+  if (jikiX == 450 && jikiY == 0) {
+    fill(50,256,50,256);
+    rect(0,0,500,500);
+  }
+}
+
 
 //ゲームオーバーについて
 var kyoriX2,kyoriY2;
