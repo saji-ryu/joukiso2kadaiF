@@ -38,7 +38,7 @@ function jiki() {
 
 //〜敵機について〜
 var tekiX = 0;
-var tekiY = 200;
+var tekiY = 400;
 var random;
 function teki() {
   fill(256,256,50,256);
@@ -93,9 +93,8 @@ function atari() {
     atariright();
   }
 }
-
 function atariup() {
-  if (jikiY != 50) {
+  if (jikiY != 0) {
     jikiY -= 50;
   }
 }
@@ -115,6 +114,8 @@ function atariright() {
   }
 }
 
+
+//ゴール
 function goal() {
   if (jikiX == 450 && jikiY == 0) {
     fill(50,256,50,256);
