@@ -50,22 +50,22 @@ function moveteki() {
   kyoriX = Math.abs(tekiX - jikiX);
   kyoriY = Math.abs(tekiY - jikiY);
   if (kyoriX < kyoriY && tekiY <= jikiY) {
-    tekiY += 50;
+    tekiY = ataridown(tekiY);
   }else if (kyoriX < kyoriY && jikiY <= tekiY) {
-    tekiY -= 50;
+    tekiY = atariup(tekiY);
   }else if (kyoriY < kyoriX && tekiX <= jikiX) {
-    tekiX += 50;
+    tekiX = atariright(tekiX);
   }else if (kyoriY < kyoriX && jikiX <= tekiX) {
-    tekiX -= 50;
+    tekiX = atarileft(tekiX);
   }else if (kyoriX == kyoriY) {
     if (random == 0 && tekiY <= jikiY) {
-      tekiY += 50;
+      tekiY = ataridown(tekiY);
     }else if (random == 0 && jikiY <= tekiY) {
-      tekiY -= 50;
+      tekiY = atariup(tekiY);
     }else if (random == 1 && tekiX <= jikiX) {
-      tekiX += 50;
+      tekiX = atariright(tekiX);
     }else if (random == 1 && jikiX <= tekiX) {
-      tekiX -= 50;
+      tekiX = atarileft(tekiX);
     }
   }
 }
@@ -81,36 +81,44 @@ function keyPressed() {
 //当たり判定について
 function atari() {
   if (keyCode === UP_ARROW) {
-    atariup();
+    jikiY = atariup(jikiY);
   }
   if (keyCode === DOWN_ARROW) {
-    ataridown();
+    jikiY = ataridown(jikiY);
   }
   if (keyCode === LEFT_ARROW) {
-    atarileft();
+    jikiX = atarileft(jikiX);
   }
   if (keyCode === RIGHT_ARROW) {
-    atariright();
+    jikiX = atariright(jikiX);
   }
 }
-function atariup() {
-  if (jikiY != 0) {
-    jikiY -= 50;
+function atariup(hanteichiY) {
+  if (hanteichiY != 0) {
+    return hanteichiY -= 50;
+  }else {
+    return hanteichiY;
   }
 }
-function ataridown() {
-  if (jikiY != 450) {
-    jikiY += 50;
+function ataridown(hanteichiY) {
+  if (hanteichiY != 450) {
+    return hanteichiY += 50;
+  }else {
+    return hanteichiY;
   }
 }
-function atarileft() {
-  if (jikiX != 50) {
-    jikiX -= 50;
+function atarileft(hanteichiX) {
+  if (hanteichiX != 50) {
+    return hanteichiX -= 50;
+  }else {
+    return hanteichiX;
   }
 }
-function atariright() {
-  if (jikiX != 450) {
-    jikiX += 50;
+function atariright(hanteichiX) {
+  if (hanteichiX != 450) {
+    return hanteichiX += 50;
+  }else {
+    return hanteichiX;
   }
 }
 
