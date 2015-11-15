@@ -28,12 +28,34 @@ function field() {
   }
 }
 
+//キー押された時の動作をそれぞれ指定
+function keyPressed() {
+  if (keyCode === UP_ARROW || keyCode === DOWN_ARROW || keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
+    movejiki();
+    moveteki();
+  }
+}
+
 //〜自機について〜
 var jikiX = 200;
 var jikiY = 450;
 function jiki() {
   fill(256,100,100,256);
   rect(jikiX,jikiY,50,50);
+}
+function movejiki() {
+  if (keyCode === UP_ARROW) {
+    jikiY = atariup(jikiY);
+  }
+  if (keyCode === DOWN_ARROW) {
+    jikiY = ataridown(jikiY);
+  }
+  if (keyCode === LEFT_ARROW) {
+    jikiX = atarileft(jikiX);
+  }
+  if (keyCode === RIGHT_ARROW) {
+    jikiX = atariright(jikiX);
+  }
 }
 
 //〜敵機について〜
@@ -70,29 +92,8 @@ function moveteki() {
   }
 }
 
-//キー押された時の動作をそれぞれ指定
-function keyPressed() {
-  if (keyCode === UP_ARROW || keyCode === DOWN_ARROW || keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
-    atari();
-    moveteki();
-  }
-}
 
 //当たり判定について
-function atari() {
-  if (keyCode === UP_ARROW) {
-    jikiY = atariup(jikiY);
-  }
-  if (keyCode === DOWN_ARROW) {
-    jikiY = ataridown(jikiY);
-  }
-  if (keyCode === LEFT_ARROW) {
-    jikiX = atarileft(jikiX);
-  }
-  if (keyCode === RIGHT_ARROW) {
-    jikiX = atariright(jikiX);
-  }
-}
 function atariup(hanteichiY) {
   if (hanteichiY != 0) {
     return hanteichiY -= 50;
