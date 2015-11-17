@@ -2,6 +2,7 @@ var canvas;
 var a;
 var over = 0;
 var ms1,ms2,keika;
+var i = 0;
 
 function setup(){
   canvas = createCanvas(window.innerWidth,
@@ -14,7 +15,7 @@ function setup(){
 function draw() {
   field();
   jiki();
-  teki();
+  timecount();
   gameover();
   istouchedteki();
   goal();
@@ -33,7 +34,7 @@ function field() {
 function keyPressed() {
   if (keyCode === UP_ARROW || keyCode === DOWN_ARROW || keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
     movejiki();
-    moveteki();
+    //moveteki();
   }
 }
 
@@ -92,7 +93,15 @@ function moveteki() {
     }
   }
 }
-
+function timecount() {
+  if (i > 10) {
+    i = 0;
+    moveteki();
+  } else {
+    i += 1;
+    teki();
+  }
+}
 
 //当たり判定について
 function atariup(hanteichiY) {
