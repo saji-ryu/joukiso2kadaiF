@@ -96,7 +96,7 @@ function moveteki() {
   }
 }
 function timecount() {
-  if (i > 30) {
+  if (i > 20) {
     i = 0;
     moveteki();
   } else {
@@ -108,28 +108,28 @@ function timecount() {
 //当たり判定について
 function atariup(hanteichiY) {
   if (hanteichiY != 0) {
-    return hanteichiY -= 50;
+    return hanteichiY -= 25;
   }else {
     return hanteichiY;
   }
 }
 function ataridown(hanteichiY) {
-  if (hanteichiY != 450) {
-    return hanteichiY += 50;
+  if (hanteichiY != 675) {
+    return hanteichiY += 25;
   }else {
     return hanteichiY;
   }
 }
 function atarileft(hanteichiX) {
-  if (hanteichiX != 50) {
-    return hanteichiX -= 50;
+  if (hanteichiX != 0) {
+    return hanteichiX -= 25;
   }else {
     return hanteichiX;
   }
 }
 function atariright(hanteichiX) {
-  if (hanteichiX != 450) {
-    return hanteichiX += 50;
+  if (hanteichiX != 1175) {
+    return hanteichiX += 25;
   }else {
     return hanteichiX;
   }
