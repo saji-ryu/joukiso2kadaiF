@@ -23,10 +23,12 @@ function draw() {
 
 function field() {
   fill(0,200,256,256);
-  rect(0,0,500,500);
-  for (var i = 0; i < 11; i++) {
-    line(50*i,0,50*i,500);
-    line(0,50*i,500,50*i);
+  rect(0,0,1200,700);
+  for (var i = 0; i < 49; i++) {
+    line(25*i,0,25*i,700);
+  }
+  for (var i = 0; i < 29; i++) {
+    line(0,25*i,1200,25*i);
   }
 }
 
@@ -43,7 +45,7 @@ var jikiX = 200;
 var jikiY = 450;
 function jiki() {
   fill(256,100,100,256);
-  rect(jikiX,jikiY,50,50);
+  rect(jikiX,jikiY,25,25);
 }
 function movejiki() {
   if (keyCode === UP_ARROW) {
