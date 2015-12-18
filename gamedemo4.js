@@ -13,21 +13,21 @@ function setup(){
 }
 
 function draw() {
-  field();
-  jiki();
-  timecount();
-  gameover();
-  istouchedteki();
-  goal();
+  field();    //フィールドを描画
+  jiki();   //自機の描画
+  timecount();    //敵の移動のためのカウント。敵の動きを管理
+  gameover();   //ゲームオーバーか判定
+  istouchedteki();    //敵に追いつかれたか判定
+  goal();   //ゴールに到達したかどうか判定
 }
 
 function field() {
   fill(0,200,256,256);
   rect(0,0,1200,700);
-  for (var i = 0; i < 49; i++) {
+  for (var i = 0; i < 49; i++) {    //縦線を繰り返しで描画
     line(25*i,0,25*i,700);
   }
-  for (var i = 0; i < 29; i++) {
+  for (var i = 0; i < 29; i++) {    //横線を繰り返しで描画
     line(0,25*i,1200,25*i);
   }
 }
@@ -64,17 +64,21 @@ function movejiki() {
 
 //〜敵機について〜
 var tekiX = 0;
-var tekiY = 400;
+var tekiY = 100;
+var tekiXX = 1100;
+var tekiYY = 650;
 var random;
 function teki() {
   fill(256,256,50,256);
-  rect(tekiX,tekiY,50,50);
+  rect(tekiX,tekiY,25,25);
+  rect(tekiXX,tekiYY,25,25);
 }
-var kyoriX,kyoriY;
-function moveteki() {
+
+function moveteki1() {
   random = Math.floor(Math.random()*2);
-  kyoriX = Math.abs(tekiX - jikiX);
-  kyoriY = Math.abs(tekiY - jikiY);
+  var kyoriX,kyoriY;
+  kyoriX = kyori(tekiX,jikiX);
+  kyoriY = kyori(tekiY,jikiY);
   if (kyoriX < kyoriY && tekiY <= jikiY) {
     tekiY = ataridown(tekiY);
   }else if (kyoriX < kyoriY && jikiY <= tekiY) {
@@ -95,17 +99,45 @@ function moveteki() {
     }
   }
 }
+
+function moveteki2() {
+  random = Math.floor(Math.random()*2);
+  var kyoriXX,kyoriYY;
+  kyoriXX = kyori(tekiXX,jikiX);
+  kyoriYY = kyori(tekiYY,jikiY);
+  if (kyoriXX < kyoriYY && tekiYY <= jikiY) {
+     tekiYY = ataridown(tekiYY);
+  }else if (kyoriXX < kyoriYY && jikiY <= tekiYY) {
+     tekiYY = atariup(tekiYY);
+  }else if (kyoriYY < kyoriXX && tekiXX <= jikiX) {
+     tekiXX = atariright(tekiXX);
+  }else if (kyoriYY < kyoriXX && jikiX <= tekiXX) {
+     tekiXX = atarileft(tekiXX);
+  }else if (kyoriXX == kyoriYY) {
+    if (random == 0 && tekiYY <= jikiY) {
+       tekiYY = ataridown(tekiYY);
+    }else if (random == 0 && jikiY <= tekiYY) {
+       tekiYY = atariup(tekiYY);
+    }else if (random == 1 && tekiXX <= jikiX) {
+       tekiXX = atariright(tekiXX);
+    }else if (random == 1 && jikiX <= tekiXX) {
+       tekiXX = atarileft(tekiXX);
+    }
+  }
+}
+
 function timecount() {
   if (i > 20) {
     i = 0;
-    moveteki();
+    moveteki1();
+    moveteki2();
   } else {
     i += 1;
     teki();
   }
 }
 
-//当たり判定について
+//当たり判定について　上下右左専門に設置。それぞれ進める場合は指定された方向に座標を変更。
 function atariup(hanteichiY) {
   if (hanteichiY != 0) {
     return hanteichiY -= 25;
@@ -136,11 +168,16 @@ function atariright(hanteichiX) {
 }
 
 
+function kyori(p1,p2) {
+  return Math.abs(p1 - p2);
+}
+
+
 //ゴールについて
 function goal() {
-  if (jikiX == 450 && jikiY == 0) {
+  if (jikiX == 1175 && jikiY == 0) {
     fill(50,256,50,256);
-    rect(0,0,500,500);
+    rect(0,0,1200,700);
   }
 }
 
@@ -148,8 +185,8 @@ function goal() {
 //ゲームオーバーについて
 var kyoriX2,kyoriY2;
 function istouchedteki() {
-  kyoriX2 = Math.abs(tekiX - jikiX);
-  kyoriY2 = Math.abs(tekiY - jikiY);
+  kyoriX2 = kyori(tekiX,jikiX);
+  kyoriY2 = kyori(tekiY,jikiY);
   if (kyoriX2 == 0 && kyoriY2 <= 50) {
     over = 256;
   }else if (kyoriX2 <= 50 && kyoriY2 == 0) {
@@ -158,5 +195,5 @@ function istouchedteki() {
 }
 function gameover() {
   fill(256,50,50,over);
-  rect(0,0,500,500);
+  rect(0,0,1200,700);
 }
